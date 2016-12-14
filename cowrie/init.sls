@@ -105,6 +105,10 @@ cowrie_grants:
 /root/mysql.sql:
   file.managed:
     - source: salt://cowrie/files/mysql.sql
+    
+iptables -t nat -A PREROUTING -p tcp --dport 22 -j REDIRECT --to-port 2222:
+  cmd.run:
+    - shell: /bin/bash
 
 mysql -u cowrie --password=<MYSQL_PASSWORD> cowrie < /root/mysql.sql:
   cmd.run:
