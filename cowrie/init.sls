@@ -72,6 +72,10 @@ ssh-keygen -t dsa -b 1024 -f ssh_host_dsa_key:
     - user: cowrie
     - cwd: /home/cowrie/cowrie/data
     - shell: /bin/bash
+    
+iptables -t nat -A PREROUTING -p tcp --dport 22 -j REDIRECT --to-port 2222:
+  cmd.run:
+    - shell: /bin/bash
 
 ./start.sh:
   cmd.run:
@@ -105,11 +109,7 @@ cowrie_grants:
 /root/mysql.sql:
   file.managed:
     - source: salt://cowrie/files/mysql.sql
-    
-iptables -t nat -A PREROUTING -p tcp --dport 22 -j REDIRECT --to-port 2222:
-  cmd.run:
-    - shell: /bin/bash
-
+ 
 mysql -u cowrie --password=<MYSQL_PASSWORD> cowrie < /root/mysql.sql:
   cmd.run:
     - shell: /bin/bash
