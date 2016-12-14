@@ -32,7 +32,12 @@ libmysqlclient-dev:
   
 python-pip:
   pkg.installed
-
+  
+upgrade_pip:
+  pip.installed:
+    - name: pip
+    - upgrade: True
+    
 install_py_deps:
   pip.installed:
     - names:
