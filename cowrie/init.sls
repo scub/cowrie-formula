@@ -56,6 +56,7 @@ py_deps:
 
 cowrie_user:
   user.present:
+    - name: cowrie
     - fullname: cowrie
     - home: /home/cowrie
     - empty_password: True
