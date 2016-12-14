@@ -119,6 +119,7 @@ cowrie_database:
 
 cowrie_database_user:
   mysql_user.present:
+    - name: cowrie
     - host: localhost
     - password: <MYSQL_PASSWORD>
 
