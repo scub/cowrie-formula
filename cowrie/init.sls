@@ -33,6 +33,9 @@ libmysqlclient-dev:
 python-pip:
   pkg.installed
   
+authbind:
+  pkg.installed
+  
 pip_upgrade:
   pip.installed:
     - name: pip
@@ -74,6 +77,13 @@ ssh-keygen -t dsa -b 1024 -f ssh_host_dsa_key:
     - user: cowrie
     - cwd: /home/cowrie/cowrie/data
     - shell: /bin/bash
+    
+/home/cowrie/cowrie/start.sh:
+  file.managed:
+    - user: cowrie
+    - group: cowrie
+    - mode: 644
+    - source: salt://cowrie/files/start.sh
 
 /home/cowrie/cowrie/cowrie.cfg:
   file.managed:
@@ -96,15 +106,11 @@ ssh-keygen -t dsa -b 1024 -f ssh_host_dsa_key:
     - mode: 644
     - source: salt://cowrie/files/sshd_config
     
-forward_ssh:
-  iptables.append:
-    - table: nat
-    - chain: PREROUTING
-    - jump: REDIRECT
-    - proto: tcp
-    - dport: 22
-    - sport: 2222
-    - save: true
+/etc/authbind/byport/22:
+  file.managed:
+    - user: cowrie
+    - group: cowrie
+    - mode: 770
 
 ./start.sh:
   cmd.run:
