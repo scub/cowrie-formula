@@ -95,9 +95,15 @@ ssh-keygen -t dsa -b 1024 -f ssh_host_dsa_key:
     - mode: 644
     - source: salt://cowrie/files/sshd_config
     
-iptables -t nat -A PREROUTING -p tcp --dport 22 -j REDIRECT --to-port 2222:
-  cmd.run:
-    - shell: /bin/bash
+forward_ssh:
+  iptables.append:
+    - table: nat
+    - chain: PREROUTING
+    - jump: REDIRECT
+    - proto: tcp
+    - dport: 22
+    - sport: 2222
+    - save: true
 
 ./start.sh:
   cmd.run:
