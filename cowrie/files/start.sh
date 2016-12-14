@@ -1,5 +1,5 @@
 #!/bin/sh
-AUTHBIND_ENABLED=no
+AUTHBIND_ENABLED=yes
 COWRIEDIR=$(dirname $0)
 PIDFILE="var/run/cowrie.pid"
 export PYTHONPATH=${PYTHONPATH}:${COWRIEDIR}
