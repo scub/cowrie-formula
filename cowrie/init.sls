@@ -29,7 +29,7 @@ python2.7-minimal:
 
 libmysqlclient-dev:
   pkg.installed
-
+  
 wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py:
   cmd.run:
     - shell: /bin/bash
@@ -61,17 +61,25 @@ git clone http://github.com/micheloosterhof/cowrie /home/cowrie/cowrie:
   cmd.run:
     - user: cowrie
 
-cp cowrie.cfg.dist cowrie.cfg:
-  cmd.run:
-    - user: cowrie
-    - cwd: /home/cowrie/cowrie
-    - shell: /bin/bash
-
 ssh-keygen -t dsa -b 1024 -f ssh_host_dsa_key:
   cmd.run:
     - user: cowrie
     - cwd: /home/cowrie/cowrie/data
     - shell: /bin/bash
+
+/home/cowrie/cowrie/cowrie.cfg:
+file.managed:
+  - user: cowrie
+  - group: cowrie
+  - mode: 644
+  - source: salt://cowrie/files/cowrie.cfg
+    
+/etc/ssh/sshd_config:
+file.managed:
+  - user: root
+  - group: root
+  - mode: 644
+  - source: salt://cowrie/files/sshd_config
     
 iptables -t nat -A PREROUTING -p tcp --dport 22 -j REDIRECT --to-port 2222:
   cmd.run:
