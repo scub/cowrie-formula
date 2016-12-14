@@ -1,34 +1,34 @@
 {% if grains['id'].startswith('cowrie') %}
 
 git:
-  pkg.installed: []
+  pkg.installed
 
 virtualenv:
-  pkg.installed: []
+  pkg.installed
 
 libmpfr-dev:
-  pkg.installed: []
+  pkg.installed
 
 libssl-dev:
-  pkg.installed: []
+  pkg.installed
 
 libmpc-dev:
-  pkg.installed: []
+  pkg.installed
 
 libffi-dev:
-  pkg.installed: []
+  pkg.installed
 
 build-essential:
-  pkg.installed: []
+  pkg.installed
 
 libpython-dev:
-  pkg.installed: []
+  pkg.installed
 
 python2.7-minimal:
-  pkg.installed: []
+  pkg.installed
 
 libmysqlclient-dev:
-  pkg.installed: []
+  pkg.installed
 
 wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py:
   cmd.run:
@@ -88,10 +88,10 @@ export PYTHONPATH=/home/cowrie/cowrie:
 {% elif grains['id'].startswith('mysql_cowrie') %}
 
 mysql-server:
-  pkg.installed: []
+  pkg.installed
 
 mysql-client:
-  pkg.installed: []
+  pkg.installed
 
 cowrie_db:
   mysql_database.present:
