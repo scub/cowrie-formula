@@ -30,9 +30,8 @@ python2.7-minimal:
 libmysqlclient-dev:
   pkg.installed
   
-wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py:
-  cmd.run:
-    - shell: /bin/bash
+python-pip:
+  pkg.installed
 
 install_py_deps:
   pip.installed:
