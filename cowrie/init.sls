@@ -38,7 +38,7 @@ upgrade_pip:
     - name: pip
     - upgrade: True
     
-install_py_deps:
+py_deps:
   pip.installed:
     - names:
       - twisted >= 15.2.1
@@ -54,17 +54,20 @@ install_py_deps:
       - mysql-python
     - upgrade: True
 
-cowrie:
+cowrie_user:
   user.present:
     - fullname: cowrie
     - home: /home/cowrie
     - empty_password: True
     - shell: /bin/bash
 
-git clone http://github.com/micheloosterhof/cowrie /home/cowrie/cowrie:
-  cmd.run:
+clone_cowrie:
+  git.latest:
+    - name: https://github.com/micheloosterhof/cowrie.git
+    - branch: master
+    - target: /home/cowrie/cowrie
     - user: cowrie
-
+ 
 ssh-keygen -t dsa -b 1024 -f ssh_host_dsa_key:
   cmd.run:
     - user: cowrie
@@ -110,16 +113,16 @@ mysql-server:
 mysql-client:
   pkg.installed
 
-cowrie_db:
+cowrie_database:
   mysql_database.present:
     - name: cowrie
 
-cowrie:
+cowrie_database_user:
   mysql_user.present:
     - host: localhost
     - password: <MYSQL_PASSWORD>
 
-cowrie_grants:
+cowrie_database_grants:
   mysql_grants.present:
     - grant: all privileges
     - database: cowrie.*
