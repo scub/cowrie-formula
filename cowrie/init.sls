@@ -68,18 +68,25 @@ ssh-keygen -t dsa -b 1024 -f ssh_host_dsa_key:
     - shell: /bin/bash
 
 /home/cowrie/cowrie/cowrie.cfg:
-file.managed:
-  - user: cowrie
-  - group: cowrie
-  - mode: 644
-  - source: salt://cowrie/files/cowrie.cfg
+  file.managed:
+    - user: cowrie
+    - group: cowrie
+    - mode: 644
+    - source: salt://cowrie/files/cowrie.cfg
+  
+/home/cowrie/cowrie/data/userdb.txt:
+  file.managed:
+    - user: cowrie
+    - group: cowrie
+    - mode: 644
+    - source: salt://cowrie/files/userdb.txt
     
 /etc/ssh/sshd_config:
-file.managed:
-  - user: root
-  - group: root
-  - mode: 644
-  - source: salt://cowrie/files/sshd_config
+  file.managed:
+    - user: root
+    - group: root
+    - mode: 644
+    - source: salt://cowrie/files/sshd_config
     
 iptables -t nat -A PREROUTING -p tcp --dport 22 -j REDIRECT --to-port 2222:
   cmd.run:
