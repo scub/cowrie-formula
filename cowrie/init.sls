@@ -73,12 +73,6 @@ ssh-keygen -t dsa -b 1024 -f ssh_host_dsa_key:
     - cwd: /home/cowrie/cowrie/data
     - shell: /bin/bash
 
-export PYTHONPATH=/home/cowrie/cowrie:
-  cmd.run:
-    - user: cowrie
-    - cwd: /home/cowrie/cowrie
-    - shell: /bin/bash
-
 ./start.sh:
   cmd.run:
     - user: cowrie
