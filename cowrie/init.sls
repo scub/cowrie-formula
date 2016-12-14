@@ -116,9 +116,6 @@ forward_ssh:
 mysql-server:
   pkg.installed
 
-mysql-client:
-  pkg.installed
-
 cowrie_database:
   mysql_database.present:
     - name: cowrie
