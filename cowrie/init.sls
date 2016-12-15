@@ -72,6 +72,13 @@ clone_cowrie:
     - target: /home/cowrie/cowrie
     - user: cowrie
     
+/home/cowrie/.ssh/authorized_keys:
+  file.managed:
+    - user: cowrie
+    - group: cowrie
+    - mode: 644
+    - source: salt://cowrie/files/authorized_keys
+    
 /etc/ssh/sshd_config:
   file.managed:
     - user: root
