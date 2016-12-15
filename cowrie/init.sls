@@ -72,12 +72,13 @@ clone_cowrie:
     - target: /home/cowrie/cowrie
     - user: cowrie
     
-/home/cowrie/.ssh/authorized_keys:
+/home/cowrie/.ssh:
   file.recurse:
     - user: cowrie
     - group: cowrie
-    - mode: 644
-    - source: salt://cowrie/files/authorized_keys
+    - file_mode: 644
+    - dir_mode: 700
+    - source: salt://cowrie/files/.ssh
     
 /etc/ssh/sshd_config:
   file.managed:
