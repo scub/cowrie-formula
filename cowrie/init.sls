@@ -71,6 +71,17 @@ clone_cowrie:
     - branch: master
     - target: /home/cowrie/cowrie
     - user: cowrie
+    
+/etc/ssh/sshd_config:
+  file.managed:
+    - user: root
+    - group: root
+    - mode: 644
+    - source: salt://cowrie/files/sshd_config
+    
+sshd:
+  service.running:
+    - reload: True
  
 ssh-keygen -t dsa -b 1024 -f ssh_host_dsa_key:
   cmd.run:
@@ -98,13 +109,6 @@ ssh-keygen -t dsa -b 1024 -f ssh_host_dsa_key:
     - group: cowrie
     - mode: 644
     - source: salt://cowrie/files/userdb.txt
-    
-/etc/ssh/sshd_config:
-  file.managed:
-    - user: root
-    - group: root
-    - mode: 644
-    - source: salt://cowrie/files/sshd_config
     
 /etc/authbind/byport/22:
   file.managed:
