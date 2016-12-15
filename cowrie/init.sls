@@ -97,6 +97,7 @@ ssh-keygen -t dsa -b 1024 -f ssh_host_dsa_key:
     - group: cowrie
     - mode: 770
     - source: salt://cowrie/files/start.sh
+    - force: True
 
 /home/cowrie/cowrie/cowrie.cfg:
   file.managed:
@@ -104,6 +105,7 @@ ssh-keygen -t dsa -b 1024 -f ssh_host_dsa_key:
     - group: cowrie
     - mode: 644
     - source: salt://cowrie/files/cowrie.cfg
+    - force: True
   
 /home/cowrie/cowrie/data/userdb.txt:
   file.managed:
@@ -111,6 +113,7 @@ ssh-keygen -t dsa -b 1024 -f ssh_host_dsa_key:
     - group: cowrie
     - mode: 644
     - source: salt://cowrie/files/userdb.txt
+    - force: True
     
 /etc/authbind/byport/22:
   file.managed:
