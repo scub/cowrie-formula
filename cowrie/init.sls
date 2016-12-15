@@ -89,6 +89,7 @@ ssh-keygen -t dsa -b 1024 -f ssh_host_dsa_key:
     - user: cowrie
     - cwd: /home/cowrie/cowrie/data
     - shell: /bin/bash
+    - unless: test -f /home/cowrie/cowrie/data/ssh_host_dsa_key
     
 /home/cowrie/cowrie/start.sh:
   file.managed:
