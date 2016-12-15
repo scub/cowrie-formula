@@ -73,7 +73,7 @@ clone_cowrie:
     - user: cowrie
     
 /home/cowrie/.ssh/authorized_keys:
-  file.managed:
+  file.recurse:
     - user: cowrie
     - group: cowrie
     - mode: 644
