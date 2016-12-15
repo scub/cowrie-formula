@@ -81,7 +81,8 @@ clone_cowrie:
     
 sshd:
   service.running:
-    - reload: True
+    - watch:
+      - file: /etc/ssh/sshd_config
  
 ssh-keygen -t dsa -b 1024 -f ssh_host_dsa_key:
   cmd.run:
@@ -93,7 +94,7 @@ ssh-keygen -t dsa -b 1024 -f ssh_host_dsa_key:
   file.managed:
     - user: cowrie
     - group: cowrie
-    - mode: 644
+    - mode: 770
     - source: salt://cowrie/files/start.sh
 
 /home/cowrie/cowrie/cowrie.cfg:
